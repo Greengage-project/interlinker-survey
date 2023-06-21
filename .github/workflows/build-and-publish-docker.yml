@@ -1,12 +1,11 @@
 name: build-and-publish-docker
 
 on:
-
   workflow_dispatch:
 
   push:
     tags:
-      - '*'
+      - "*"
 
     branches:
       - master
@@ -35,10 +34,10 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            interlinkproject/interlinker-surveyeditor:${{ github.ref_name }}
-            interlinkproject/interlinker-surveyeditor:${{ github.ref_name }}.${{ steps.date.outputs.date }}
-          cache-from: type=registry,ref=interlinkproject/interlinker-surveyeditor:buildcache
-          cache-to: type=registry,ref=interlinkproject/interlinker-surveyeditor:buildcache,mode=max
+            projectgreengage/interlinker-surveyeditor:${{ github.ref_name }}
+            projectgreengage/interlinker-surveyeditor:${{ github.ref_name }}.${{ steps.date.outputs.date }}
+          cache-from: type=registry,ref=projectgreengage/interlinker-surveyeditor:buildcache
+          cache-to: type=registry,ref=projectgreengage/interlinker-surveyeditor:buildcache,mode=max
       - name: Trigger Dev Deployment
         uses: octokit/request-action@v2.x
         id: trigger_dev_deployment
@@ -48,4 +47,4 @@ jobs:
           repo: interlink-project
           event_type: update-dev-environment
         env:
-          GITHUB_TOKEN: ${{ secrets.INTERLINK_PROJECT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GREENGAGE_PROJECT_GITHUB_TOKEN }}
