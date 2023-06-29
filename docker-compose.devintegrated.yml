@@ -1,13 +1,13 @@
 version: "3.7"
 services:
-
   surveyeditor:
-    image: 'surveyeditordev'
+    image: "surveyeditordev"
     container_name: surveyeditor-integrated
     volumes:
       - ./app:/app
     env_file:
       - .env
+      - .secrets
     environment:
       - PROTOCOL=http://
       - SERVER_NAME=${DOMAIN?Variable not set}
